@@ -16,7 +16,6 @@
         <div class="form-group">
             <label for="isbn"><b>Book ID :</b></label>
             <input type="text" class="form-control" id="isbn" placeholder="ISBN Number">
-
         </div>
         <button type="submit" class="btn btn-outline-primary">Add</button>
     </form>
@@ -30,16 +29,13 @@
                 <th scope="col">ISBN Number</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="BookList" *ngFor="let Book of StoredBooks">
             <tr>
-                <th scope="row">1</th>
-                <td>Book 1</td>
-                <td>Author 1</td>
-                <td>13456789</td>
-                <td><button type="submit" class="btn btn-outline-primary">Remove</button></td>
+                <td>{{Book.title}}</td>
+                <td>{{Book.author}}</td>
+                <td>{{Book.id}}</td>
+                <td><button type="submit" class="btn btn-outline-primary" (click)="removeBook(Book)">Remove</button></td>
             </tr>
-
         </tbody>
     </table>
-
 </div>
