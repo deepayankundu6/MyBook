@@ -14,7 +14,7 @@ export class AppComponent {
   bookTitle;
   bookAuthor;
   bookISBN;
-  searchBook;
+  public searchBook: string;
   flag = false;
   bookDetails = new FormGroup({
     bookTitle: new FormControl(''),
