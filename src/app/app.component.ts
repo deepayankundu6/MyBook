@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,14 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(private toastr: ToastrService) { }
+
   title = 'MyBook';
   bookTitle;
   bookAuthor;
   bookISBN;
+  searchBook;
+  flag = false;
   bookDetails = new FormGroup({
     bookTitle: new FormControl(''),
     bookAuthor: new FormControl(''),
@@ -50,17 +55,33 @@ export class AppComponent {
     this.bookAuthor = data.bookAuthor;
     this.bookISBN = data.bookISBN;
     const newBook = new Book(this.bookTitle, this.bookAuthor, this.bookISBN);
-    this.addBook(newBook);
+    this.StoredBooks.forEach(book => {
+      if (book.title === newBook.title || book.author === newBook.author || book.id === newBook.id) {
+        this.toastr.error('Error, The book already exists');
+        this.flag = true;
+      }
+    });
+    if (!this.flag) {
+      this.addBook(newBook);
+      this.flag = false;
+    }
   }
 
   removeBook(B: Book) {
     const index = this.StoredBooks.indexOf(B);
     this.StoredBooks.splice(index, 1);
+    this.toastr.success('Success, Book removed successfully');
 
   }
   addBook(B: Book) {
-    this.StoredBooks.push(B);
+    if (B.title !== '' && B.author !== '' && B.id !== '') {
+      this.StoredBooks.push(B);
+      this.toastr.success('Success, Book added successfully');
+    } else {
+      this.toastr.error('Error, Please enter book details correctly');
+    }
   }
+
 }
 class Book {
   title: any;
