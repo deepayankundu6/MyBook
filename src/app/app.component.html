@@ -4,18 +4,18 @@
     </h1>
 </div>
 <div class="container mt-4">
-    <form>
+    <form [formGroup]="bookDetails" (ngSubmit)="getBooks(bookDetails.value)">
         <div class="form-group">
             <label for="book"><b>Book Title :</b></label>
-            <input type="text" class="form-control" id="book" placeholder="Title">
+            <input type="text" class="form-control" id="book" placeholder="Title" formControlName="bookTitle">
         </div>
         <div class="form-group">
             <label for="author"><b>Book Author :</b></label>
-            <input type="text" class="form-control" id="author" placeholder="Author">
+            <input type="text" class="form-control" id="author" placeholder="Author" formControlName="bookAuthor">
         </div>
         <div class="form-group">
             <label for="isbn"><b>Book ID :</b></label>
-            <input type="text" class="form-control" id="isbn" placeholder="ISBN Number">
+            <input type="text" class="form-control" id="isbn" placeholder="ISBN Number" formControlName="bookISBN">
         </div>
         <button type="submit" class="btn btn-outline-primary">Add</button>
     </form>

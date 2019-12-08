@@ -8,6 +8,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AppComponent {
   title = 'MyBook';
+  bookTitle;
+  bookAuthor;
+  bookISBN;
+  bookDetails = new FormGroup({
+    bookTitle: new FormControl(''),
+    bookAuthor: new FormControl(''),
+    bookISBN: new FormControl(''),
+  });
   StoredBooks: Book[] = [
     {
 
@@ -37,6 +45,14 @@ export class AppComponent {
     }
   ];
 
+  getBooks(data) {
+    this.bookTitle = data.bookTitle;
+    this.bookAuthor = data.bookAuthor;
+    this.bookISBN = data.bookISBN;
+    const newBook = new Book(this.bookTitle, this.bookAuthor, this.bookISBN);
+    this.addBook(newBook);
+  }
+
   removeBook(B: Book) {
     const index = this.StoredBooks.indexOf(B);
     this.StoredBooks.splice(index, 1);
@@ -44,7 +60,6 @@ export class AppComponent {
   }
   addBook(B: Book) {
     this.StoredBooks.push(B);
-
   }
 }
 class Book {
