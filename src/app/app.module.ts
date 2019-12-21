@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { NotifierModule } from 'angular-notifier';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,16 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          position: 'right'
+        },
+        vertical: {
+          position: 'top'
+        }
+      },
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

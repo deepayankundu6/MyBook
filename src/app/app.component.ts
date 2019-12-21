@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor(private toastr: ToastrService) { }
 
+export class AppComponent {
+  private readonly toastr: NotifierService;
   title = 'MyBook';
+  constructor(notifierService: NotifierService) {
+    this.toastr = notifierService;
+  }
   bookTitle;
   bookAuthor;
   bookISBN;
@@ -57,7 +60,7 @@ export class AppComponent {
     const newBook = new Book(this.bookTitle, this.bookAuthor, this.bookISBN);
     this.StoredBooks.forEach(book => {
       if (book.title === newBook.title || book.author === newBook.author || book.id === newBook.id) {
-        this.toastr.error('Error, The book already exists');
+        this.toastr.notify('error', 'The book already exists');
         this.flag = true;
       }
     });
@@ -70,15 +73,15 @@ export class AppComponent {
   removeBook(B: Book) {
     const index = this.StoredBooks.indexOf(B);
     this.StoredBooks.splice(index, 1);
-    this.toastr.success('Success, Book removed successfully');
+    this.toastr.notify('success', 'Book removed successfully');
 
   }
   addBook(B: Book) {
     if (B.title !== '' && B.author !== '' && B.id !== '') {
       this.StoredBooks.push(B);
-      this.toastr.success('Success, Book added successfully');
+      this.toastr.notify('success', 'Book added successfully');
     } else {
-      this.toastr.error('Error, Please enter book details correctly');
+      this.toastr.notify('error', 'Please enter book details correctly');
     }
   }
 
