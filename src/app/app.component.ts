@@ -9,7 +9,10 @@ import { NotifierService } from 'angular-notifier';
 })
 
 export class AppComponent {
+  key = 'title';
+  reverse = false;
   private readonly toastr: NotifierService;
+  searchBook: string;
   title = 'MyBook';
   constructor(notifierService: NotifierService) {
     this.toastr = notifierService;
@@ -17,7 +20,7 @@ export class AppComponent {
   bookTitle;
   bookAuthor;
   bookISBN;
-  public searchBook: string;
+
   flag = false;
   bookDetails = new FormGroup({
     bookTitle: new FormControl(''),
@@ -27,28 +30,28 @@ export class AppComponent {
   StoredBooks: Book[] = [
     {
 
-      title: 'Book 1',
-      author: 'Author 1',
-      id: '3456'
-    },
-    {
       title: 'Book 2',
       author: 'Author 2',
-      id: '7890'
+      id: '3456'
     },
     {
       title: 'Book 3',
       author: 'Author 3',
-      id: '1234'
+      id: '7890'
     },
     {
-      title: 'Book 4',
-      author: 'Author 4',
-      id: '5678'
+      title: 'Book 1',
+      author: 'Author 1',
+      id: '1234'
     },
     {
       title: 'Book 5',
       author: 'Author 5',
+      id: '5678'
+    },
+    {
+      title: 'Book 4',
+      author: 'Author 4',
       id: '4589'
     }
   ];
@@ -59,7 +62,7 @@ export class AppComponent {
     this.bookISBN = data.bookISBN;
     const newBook = new Book(this.bookTitle, this.bookAuthor, this.bookISBN);
     this.StoredBooks.forEach(book => {
-      if (book.title === newBook.title || book.author === newBook.author || book.id === newBook.id) {
+      if (book.title === newBook.title || book.id === newBook.id) {
         this.toastr.notify('error', 'The book already exists');
         this.flag = true;
       }

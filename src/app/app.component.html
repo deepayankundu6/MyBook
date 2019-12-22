@@ -36,7 +36,7 @@
                 <th scope="col">ISBN Number</th>
             </tr>
         </thead>
-        <tbody id="BookList" *ngFor="let Book of StoredBooks |filter:searchBook">
+        <tbody id="BookList" *ngFor="let Book of StoredBooks | orderBy: key : reverse | filter: searchBook">
             <tr>
                 <td>{{Book.title}}</td>
                 <td>{{Book.author}}</td>
