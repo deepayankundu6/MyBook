@@ -75,7 +75,6 @@ export class AppComponent {
     };
     dialogConfig.height = '400px';
     dialogConfig.width = '600px';
-    dialogConfig.panelClass = 'filter-popup';
     this.dialog.open(EditBookComponent, dialogConfig);
   }
   getBooks(data) {
