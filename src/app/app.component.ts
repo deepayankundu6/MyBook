@@ -68,7 +68,11 @@ export class AppComponent {
     dialogConfig.data = {
       id: 1,
       title: 'Angular For Beginners'
-    }
+    };
+    dialogConfig.position = {
+      top: '100',
+      left: '100'
+    };
 
     this.dialog.open(EditBookComponent, dialogConfig);
   }
