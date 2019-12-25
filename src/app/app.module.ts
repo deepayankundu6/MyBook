@@ -6,10 +6,13 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule } from 'angular-notifier';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { MatDialogModule } from '@angular/material';
+import { EditBookComponent } from './edit-book/edit-book.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EditBookComponent
   ],
   imports: [
     BrowserModule,
@@ -17,6 +20,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
     Ng2OrderModule,
+    MatDialogModule,
     NotifierModule.withConfig({
       position: {
         horizontal: {
@@ -29,6 +33,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EditBookComponent]
 })
 export class AppModule { }
