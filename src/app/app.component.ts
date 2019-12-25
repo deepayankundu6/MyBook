@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
 import { EditBookComponent } from './edit-book/edit-book.component';
 
 @Component({
@@ -71,9 +71,11 @@ export class AppComponent {
     };
     dialogConfig.position = {
       top: '100',
-      left: '100'
+      left: '100',
     };
-
+    dialogConfig.height = '400px';
+    dialogConfig.width = '600px';
+    dialogConfig.panelClass = 'filter-popup';
     this.dialog.open(EditBookComponent, dialogConfig);
   }
   getBooks(data) {
