@@ -121,6 +121,8 @@ export class AppComponent {
       if (book.id === EditedBook.Id) {
         book.title = EditedBook.Title;
         book.author = EditedBook.Author;
+        this.toastr.notify('success', 'Book Edited successfully');
+
       }
     });
 
