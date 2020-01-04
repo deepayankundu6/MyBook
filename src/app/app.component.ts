@@ -11,6 +11,7 @@ import { EditBookComponent } from './edit-book/edit-book.component';
 })
 
 export class AppComponent {
+  count = 0;
   key = 'title';
   reverse = false;
   private readonly toastr: NotifierService;
