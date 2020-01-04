@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -8,7 +8,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class EditBookComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<EditBookComponent>) { }
+  BookData: any;
+  title: any;
+  name: any;
+  constructor(private dialogRef: MatDialogRef<EditBookComponent>,
+    @Inject(MAT_DIALOG_DATA) data) {
+
+    this.BookData = data;
+    this.title = this.BookData.id;
+    this.name = this.BookData.name;
+    console.log(this.BookData);
+  }
 
   ngOnInit() {
   }
