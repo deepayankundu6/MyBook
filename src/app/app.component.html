@@ -39,9 +39,9 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody id="BookList" *ngFor="let Book of StoredBooks | orderBy: key : reverse | filter: searchBook" ([ngModel])="count = count+1">
+        <tbody id="BookList" *ngFor="let Book of StoredBooks | orderBy: key : reverse | filter: searchBook">
             <tr>
-                <td>{{count}}</td>
+                <td>{{count +(count +1)}}</td>
                 <td>{{Book.title}}</td>
                 <td>{{Book.author}}</td>
                 <td>{{Book.id}}</td>
