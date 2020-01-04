@@ -23,7 +23,7 @@ export class AppComponent {
   bookTitle;
   bookAuthor;
   bookISBN;
-
+  EditedBook: Book;
   flag = false;
   bookDetails = new FormGroup({
     bookTitle: new FormControl(''),
@@ -77,7 +77,10 @@ export class AppComponent {
     const dialogRef = this.dialog.open(EditBookComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data => console.log('Dialog output:', data)
+      data => {
+        this.EditedBook = data;
+        this.editBook(this.EditedBook);
+      }
     );
 
   }
@@ -87,7 +90,7 @@ export class AppComponent {
     this.bookISBN = data.bookISBN;
     const newBook = new Book(this.bookTitle, this.bookAuthor, this.bookISBN);
     this.StoredBooks.forEach(book => {
-      if (book.title === newBook.title || book.id === newBook.id) {
+      if (book.id === newBook.id) {
         this.toastr.notify('error', 'The book already exists');
         this.flag = true;
       }
@@ -111,6 +114,16 @@ export class AppComponent {
     } else {
       this.toastr.notify('error', 'Please enter book details correctly');
     }
+  }
+  editBook(EditedBook) {
+    console.log(EditedBook);
+    this.StoredBooks.forEach(book => {
+      if (book.id === EditedBook.Id) {
+        book.title = EditedBook.Title;
+        book.author = EditedBook.Author;
+      }
+    });
+
   }
 
 }
