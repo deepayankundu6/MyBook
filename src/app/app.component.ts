@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
+import { EditBookComponent } from './edit-book/edit-book.component';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +16,10 @@ export class AppComponent {
   private readonly toastr: NotifierService;
   searchBook: string;
   title = 'MyBook';
-  constructor(notifierService: NotifierService) {
+  constructor(notifierService: NotifierService, private dialog: MatDialog) {
     this.toastr = notifierService;
   }
+
   bookTitle;
   bookAuthor;
   bookISBN;
@@ -55,7 +58,25 @@ export class AppComponent {
       id: '4589'
     }
   ];
+  openDialog() {
 
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Angular For Beginners'
+    };
+    dialogConfig.position = {
+      top: '100',
+      left: '100',
+    };
+    dialogConfig.height = '400px';
+    dialogConfig.width = '600px';
+    this.dialog.open(EditBookComponent, dialogConfig);
+  }
   getBooks(data) {
     this.bookTitle = data.bookTitle;
     this.bookAuthor = data.bookAuthor;
