@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
-import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { EditBookComponent } from './edit-book/edit-book.component';
 
 @Component({
@@ -11,6 +11,7 @@ import { EditBookComponent } from './edit-book/edit-book.component';
 })
 
 export class AppComponent {
+  count = 0;
   key = 'title';
   reverse = false;
   private readonly toastr: NotifierService;
@@ -23,7 +24,7 @@ export class AppComponent {
   bookTitle;
   bookAuthor;
   bookISBN;
-
+  EditedBook: Book;
   flag = false;
   bookDetails = new FormGroup({
     bookTitle: new FormControl(''),
@@ -35,39 +36,38 @@ export class AppComponent {
 
       title: 'Book 2',
       author: 'Author 2',
-      id: '3456'
+      id: 3456
     },
     {
       title: 'Book 3',
       author: 'Author 3',
-      id: '7890'
+      id: 7890
     },
     {
       title: 'Book 1',
       author: 'Author 1',
-      id: '1234'
+      id: 1234
     },
     {
       title: 'Book 5',
       author: 'Author 5',
-      id: '5678'
+      id: 5678
     },
     {
       title: 'Book 4',
       author: 'Author 4',
-      id: '4589'
+      id: 4589
     }
   ];
-  openDialog() {
+  openDialog(isbn: number, title) {
 
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
+      id: isbn,
+      name: title
     };
     dialogConfig.position = {
       top: '100',
@@ -75,7 +75,15 @@ export class AppComponent {
     };
     dialogConfig.height = '400px';
     dialogConfig.width = '600px';
-    this.dialog.open(EditBookComponent, dialogConfig);
+    const dialogRef = this.dialog.open(EditBookComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        this.EditedBook = data;
+        this.editBook(this.EditedBook);
+      }
+    );
+
   }
   getBooks(data) {
     this.bookTitle = data.bookTitle;
@@ -83,7 +91,7 @@ export class AppComponent {
     this.bookISBN = data.bookISBN;
     const newBook = new Book(this.bookTitle, this.bookAuthor, this.bookISBN);
     this.StoredBooks.forEach(book => {
-      if (book.title === newBook.title || book.id === newBook.id) {
+      if (book.id === newBook.id) {
         this.toastr.notify('error', 'The book already exists');
         this.flag = true;
       }
@@ -101,20 +109,32 @@ export class AppComponent {
 
   }
   addBook(B: Book) {
-    if (B.title !== '' && B.author !== '' && B.id !== '') {
+    if (B.title !== '' && B.author !== '' && B.id) {
       this.StoredBooks.push(B);
       this.toastr.notify('success', 'Book added successfully');
     } else {
       this.toastr.notify('error', 'Please enter book details correctly');
     }
   }
+  editBook(EditedBook) {
+    console.log(EditedBook);
+    this.StoredBooks.forEach(book => {
+      if (book.id === EditedBook.Id) {
+        book.title = EditedBook.Title;
+        book.author = EditedBook.Author;
+        this.toastr.notify('success', 'Book Edited successfully');
+
+      }
+    });
+
+  }
 
 }
 class Book {
   title: any;
   author: any;
-  id: any;
-  constructor(title: any, author: any, id: any) {
+  id: number;
+  constructor(title: any, author: any, id: number) {
     this.title = title;
     this.author = author;
     this.id = id;
