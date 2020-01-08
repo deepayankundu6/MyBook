@@ -8,6 +8,7 @@ import { NotifierModule } from 'angular-notifier';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { MatDialogModule } from '@angular/material';
 import { EditBookComponent } from './edit-book/edit-book.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EditBookComponent } from './edit-book/edit-book.component';
     BrowserModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
+    MatFormFieldModule,
     BrowserAnimationsModule,
     Ng2OrderModule,
     MatDialogModule,
