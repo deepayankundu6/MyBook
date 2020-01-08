@@ -11,17 +11,15 @@ import { EditBookComponent } from './edit-book/edit-book.component';
 })
 
 export class AppComponent {
-  count = 0;
   key = 'title';
   reverse = false;
   private readonly toastr: NotifierService;
   searchBook: string;
   title = 'MyBook';
+  bookTitle: string;
   constructor(notifierService: NotifierService, private dialog: MatDialog) {
     this.toastr = notifierService;
   }
-
-  bookTitle;
   bookAuthor;
   bookISBN;
   EditedBook: Book;
@@ -99,6 +97,7 @@ export class AppComponent {
     if (!this.flag) {
       this.addBook(newBook);
       this.flag = false;
+      this.bookDetails.reset();
     }
   }
 
