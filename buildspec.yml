@@ -2,8 +2,8 @@ version : 0.2
 
 phases:
   install:
-  runtime-versions:
-        nodejs: 10
+    runtime-versions:
+        java: corretto8
     commands:
      - echo "install phase started"
      - npm install
