@@ -15,3 +15,7 @@ phases:
       echo "npm run build started"
       npm run build
       echo "npm run build finished"
+      artifacts:
+  files:
+    - '**/*'
+  name: myname-$(date +%Y-%m-%d)
