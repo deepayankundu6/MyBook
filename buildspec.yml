@@ -10,12 +10,18 @@ phases:
      - echo "install phase ended"
   build:
     commands:
-      echo "NPM version:"
-      npm -v
-      echo "npm run build started"
-      npm run build
-      echo "npm run build finished"
-      artifacts:
+      - echo "NPM version:"
+      - npm -v
+      - echo "npm run build started"
+      - npm run build
+      - echo "npm run build finished"
+ 
+ artifacts:
   files:
-    - '**/*'
+   - '**/*'
   name: myname-$(date +%Y-%m-%d)
+  discard-paths: yes    
+  
+  artifacts:
+  files:
+    
