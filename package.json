@@ -1,6 +1,6 @@
 {
     "name": "MyBook",
-    "version": "1",
+    "version": "0.2",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
