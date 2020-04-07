@@ -34,6 +34,8 @@
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
                 <th scope="col">ISBN Number</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody id="BookList" *ngFor="let Book of StoredBooks | orderBy: key : reverse | filter: searchBook">
@@ -42,8 +44,8 @@
                 <td>{{Book.author}}</td>
                 <td>{{Book.id}}</td>
                 <td>
-                    <!-- <button type="submit" class="btn btn-outline-primary" (click)="openDialog()">Edit</button></td> -->
-                    <td><button type=" submit " class="btn btn-outline-danger" (click)="removeBook(Book)">Remove</button></td>
+                    <button type="submit" class="btn btn-outline-primary" (click)="openDialog(Book.id, Book.title)">Edit</button></td>
+                <td><button type=" submit " class="btn btn-outline-danger" (click)="removeBook(Book)">Remove</button></td>
             </tr>
         </tbody>
     </table>
