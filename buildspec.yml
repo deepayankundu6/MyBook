@@ -1,0 +1,23 @@
+version : 0.2
+
+phases:
+  install:
+    runtime-versions:
+        nodejs: 10
+    commands:
+     - echo "install phase started"
+     - npm install
+     - echo "install phase ended"
+  build:
+    commands:
+      - echo "NPM version:"
+      - npm -v
+      - echo "npm run build started"
+      - npm run build
+      - echo "npm run build finished"
+ 
+ artifacts:
+  files:
+       - '**/*'   
+
+    
